@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.netappsid</groupId>
 	<artifactId>testproject</artifactId>
@@ -8,5 +9,38 @@
 		<url>scm:git:git@sources.netappsid.com:testproject.git</url>
 		<developerConnection>scm:git:git@sources.netappsid.com:testproject.git</developerConnection>
 	</scm>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<testSourceDirectory>test</testSourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>com.netappsid</groupId>
+				<artifactId>deployS3</artifactId>
+				<version>1.0.0</version>
+				<executions>
+					<execution>
+						<phase>deploy</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 
+		<extensions>
+			<extension>
+				<groupId>org.cyclopsgroup</groupId>
+				<artifactId>awss3-maven-wagon</artifactId>
+				<version>0.1</version>
+			</extension>
+		</extensions>
+	</build>
+
+	<distributionManagement>
+		<repository>
+			<id>mavenclonerepository</id>
+			<url>s3://mavenclonerepository/</url>
+		</repository>
+	</distributionManagement>
 </project>
