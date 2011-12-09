@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.netappsid</groupId>
 	<artifactId>testproject</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.0.4</version>
 	<scm>
 		<connection>scm:git:git@sources.netappsid.com:testproject.git</connection>
 		<url>scm:git:git@sources.netappsid.com:testproject.git</url>
