@@ -38,8 +38,8 @@
 
 	<distributionManagement>
 		<repository>
-			<id>mavenclonerepository</id>
-			<url>s3://mavenclonerepository/</url>
+			<id>test</id>
+			<url>file:///home/cnadeau/test/</url>
 		</repository>
 	</distributionManagement>
 </project>
