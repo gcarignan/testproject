@@ -3,6 +3,7 @@
 	<groupId>com.netappsid</groupId>
 	<artifactId>testproject</artifactId>
 	<version>0.0.16-SNAPSHOT</version>
+	<packaging>bundle</packaging>
 	<scm>
 		<connection>scm:git:git@sources.netappsid.com:testproject.git</connection>
 		<url>scm:git:git@sources.netappsid.com:testproject.git</url>
