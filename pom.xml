@@ -21,7 +21,7 @@
 					<execution>
 						<phase>deploy</phase>
 						<goals>
-							<goal>test</goal>
+							<goal>deployToAwsS3</goal>
 						</goals>
 					</execution>
 				</executions>
