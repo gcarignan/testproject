@@ -1,17 +1,26 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>com.netappsid.testproject</artifactId>
-	<version>0.0.43-SNAPSHOT</version>
+	<version>0.0.39</version>
 	<packaging>bundle</packaging>
 	<scm>
 		<connection>scm:git:git@sources.netappsid.com:testproject.git</connection>
 		<url>scm:git:git@sources.netappsid.com:testproject.git</url>
 		<developerConnection>scm:git:git@sources.netappsid.com:testproject.git</developerConnection>
 	</scm>
+
+	<parent>
+		<groupId>com.netappsid</groupId>
+		<artifactId>netappsid-parent</artifactId>
+		<version>5-SNAPSHOT</version>
+	</parent>
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<testSourceDirectory>test</testSourceDirectory>
 		<plugins>
+
 			<plugin>
 				<groupId>com.netappsid</groupId>
 				<artifactId>deployS3</artifactId>
@@ -30,9 +39,36 @@
 			</plugin>
 
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.12</version>
+				<configuration>
+					<argLine>-XX:MaxPermSize=256m</argLine>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>gensrc</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
 				<extensions>true</extensions>
+				<version>2.3.7</version>
 				<configuration>
 					<manifestLocation>META-INF</manifestLocation>
 					<instructions>
@@ -41,14 +77,6 @@
 				</configuration>
 			</plugin>
 		</plugins>
-
-		<extensions>
-			<extension>
-				<groupId>org.cyclopsgroup</groupId>
-				<artifactId>awss3-maven-wagon</artifactId>
-				<version>0.1</version>
-			</extension>
-		</extensions>
 	</build>
 
 	<distributionManagement>
@@ -57,9 +85,110 @@
 			<url>file:///home/cnadeau/test/</url>
 		</repository>
 	</distributionManagement>
-	<parent>
-		<groupId>com.netappsid</groupId>
-		<artifactId>netappsid-parent</artifactId>
-		<version>4</version>
-	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.netappsid</groupId>
+			<artifactId>com.netappsid.common</artifactId>
+			<version>2.15.5</version>
+			<type>bundle</type>
+		</dependency>
+		<dependency>
+			<groupId>com.netappsid</groupId>
+			<artifactId>com.netappsid.workbench</artifactId>
+			<version>2.10.2</version>
+			<type>bundle</type>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>com.springsource.javax.mail</artifactId>
+			<version>1.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.netappsid</groupId>
+			<artifactId>com.netappsid.configurator</artifactId>
+			<version>2.4.2</version>
+			<type>bundle</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>com.springsource.org.apache.velocity</artifactId>
+			<version>1.6.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>com.springsource.com.thoughtworks.xstream</artifactId>
+			<version>1.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.netappsid.migcalendar</groupId>
+			<artifactId>migcalendar</artifactId>
+			<version>6.1.3</version>
+			<type>bundle</type>
+		</dependency>
+		<dependency>
+			<groupId>org.joda</groupId>
+			<artifactId>com.springsource.org.joda.time</artifactId>
+			<version>1.6.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.jbossas</groupId>
+			<artifactId>com.netappsid.org.jboss.jbossas</artifactId>
+			<version>5.1.0-GA</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jfree.chart</groupId>
+			<artifactId>com.netappsid.org.jfree.chart</artifactId>
+			<version>1.0.13</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>com.springsource.org.apache.commons.beanutils</artifactId>
+			<version>1.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.batik</groupId>
+			<artifactId>com.springsource.org.apache.batik.svggen</artifactId>
+			<version>1.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.batik</groupId>
+			<artifactId>com.springsource.org.apache.batik.dom.svg</artifactId>
+			<version>1.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>xml-apis</groupId>
+			<artifactId>com.netappsid.xml.apis.ext</artifactId>
+			<version>1.3.04</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.xmlgraphics</groupId>
+			<artifactId>com.netappsid.batik.ext</artifactId>
+			<version>1.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.netappsid.test.tools</groupId>
+			<artifactId>com.netappsid.test.tools</artifactId>
+			<version>2.0.4</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.easytesting</groupId>
+			<artifactId>fest-swing-junit-4.5</artifactId>
+			<version>1.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.easytesting</groupId>
+			<artifactId>fest-util</artifactId>
+			<version>1.1.6</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.netappsid</groupId>
+			<artifactId>com.netappsid.org.apache.poi</artifactId>
+			<version>3.7</version>
+		</dependency>
+	</dependencies>
 </project>
