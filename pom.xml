@@ -78,12 +78,6 @@
 		</plugins>
 	</build>
 
-	<distributionManagement>
-		<repository>
-			<id>test</id>
-			<url>file:///home/cnadeau/test/</url>
-		</repository>
-	</distributionManagement>
 
 	<dependencies>
 		<dependency>
